@@ -10,12 +10,14 @@ import { Tag } from '../ui/Badge'
 import { Container } from '../ui/Section'
 
 const pipeline = [
-  { step: 'embed(query)', comment: 'embeddings', delay: '0s' },
-  { step: 'vector_db.search(top_k)', comment: 'semantic search', delay: '1.5s' },
-  { step: 'build_context(chunks)', comment: 'retrieval', delay: '3s' },
-  { step: 'llm.generate(context)', comment: 'Azure OpenAI', delay: '4.5s' },
-  { step: 'answer', comment: 'grounded response', delay: '6s' },
-]
+  { step: 'rewrite_prompt(query)', comment: 'prompt rewriting' },
+  { step: 'embed(query)', comment: 'embeddings' },
+  { step: 'vector_db.search(top_k)', comment: 'semantic search' },
+  { step: 'rerank(chunks)', comment: 're-ranking' },
+  { step: 'build_context(chunks)', comment: 'retrieval' },
+  { step: 'llm.generate(context)', comment: 'Azure OpenAI' },
+  { step: 'answer', comment: 'grounded response' },
+].map((line, i) => ({ ...line, delay: `${i * 1.5}s` }))
 
 function PipelineCard() {
   return (

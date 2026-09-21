@@ -29,7 +29,8 @@ export const flowNodes: FlowNode[] = [
   {
     id: 'retrieval',
     label: 'Retrieval',
-    detail: 'Query embedding, semantic and hybrid search, context construction',
+    detail:
+      'Query rewriting, embedding, semantic and hybrid search, re-ranking, context construction',
     tech: 'Embeddings · semantic search',
   },
   {

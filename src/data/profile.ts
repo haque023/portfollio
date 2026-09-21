@@ -11,8 +11,7 @@ export const profile: Profile = {
   tagline:
     'Building production-grade AI, LLM, RAG, and backend systems with .NET, Python, and Azure.',
   email: 'mhaque023@gmail.com',
-  phone: '01879888773',
-  // Bangladesh country code (+880) with the leading trunk "0" dropped.
+  phone: '+8801879888773',
   phoneHref: '+8801879888773',
   cvPath: 'cv/MD-Emdadul-Haque-CV.pdf',
   summary: [
