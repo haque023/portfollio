@@ -78,7 +78,7 @@ Place your CV at:
 public/cv/MD-Emdadul-Haque-CV.pdf
 ```
 
-The **Download CV** button checks that the file exists. If it does not, the button becomes **Request CV** (an email link), so the site never links to a 404.
+The build checks whether the file exists. If it does not, the **Download CV** button becomes **Request CV** (an email link), so the site never links to a 404. Add the PDF, then rebuild (push to `main`, or restart `npm run dev`).
 
 ---
 

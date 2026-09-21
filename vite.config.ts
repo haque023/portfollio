@@ -1,7 +1,10 @@
+import fs from 'node:fs'
+import path from 'node:path'
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { seoPlugin } from './plugins/seo.ts'
+import { profile } from './src/data/profile.ts'
 
 /** Normalise a base path to the `/segment/` form Vite expects. */
 function normaliseBase(value: string | undefined): string {
@@ -17,6 +20,12 @@ export default defineConfig(({ mode }) => {
   return {
     // `/` for a custom domain (or USERNAME.github.io). `/REPOSITORY/` for project pages.
     base,
+    define: {
+      // Resolved at build time so the browser never probes for a missing PDF.
+      __CV_AVAILABLE__: JSON.stringify(
+        fs.existsSync(path.resolve(process.cwd(), 'public', profile.cvPath)),
+      ),
+    },
     plugins: [
       react(),
       tailwindcss(),
