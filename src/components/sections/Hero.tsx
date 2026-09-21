@@ -90,11 +90,11 @@ export function Hero() {
               {profile.roles.map((role, i) => (
                 <span key={role}>
                   {i > 0 && (
-                    <span className="mx-2 text-fg-subtle" aria-hidden="true">
-                      |
-                    </span>
+                    <>
+                      {' '}
+                      <span className="mx-1 text-fg-subtle">|</span>{' '}
+                    </>
                   )}
-                  {i > 0 && <span className="sr-only"> and </span>}
                   {role}
                 </span>
               ))}
