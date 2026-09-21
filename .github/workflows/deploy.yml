@@ -38,12 +38,13 @@ jobs:
       - name: Build
         run: npm run build
         env:
+          # Custom domain: served from the domain root, so the base path is "/".
           # Optional overrides: Settings > Secrets and variables > Actions > Variables.
-          # They are public configuration, not secrets. Defaults target the standard
-          # https://OWNER.github.io/REPOSITORY/ URL; for a custom domain set
-          # VITE_BASE_PATH=/ and VITE_SITE_URL=https://yourdomain.com.
-          VITE_SITE_URL: ${{ vars.VITE_SITE_URL || format('https://{0}.github.io', github.repository_owner) }}
-          VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH || format('/{0}/', github.event.repository.name) }}
+          # They are public configuration, not secrets. If you ever serve the site from
+          # https://OWNER.github.io/REPOSITORY/ instead, set VITE_BASE_PATH=/REPOSITORY/
+          # and VITE_SITE_URL=https://OWNER.github.io.
+          VITE_SITE_URL: ${{ vars.VITE_SITE_URL || 'https://emdadulhaque.work.gd' }}
+          VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH || '/' }}
           VITE_GITHUB_USERNAME: ${{ vars.VITE_GITHUB_USERNAME || github.repository_owner }}
           VITE_LINKEDIN_URL: ${{ vars.VITE_LINKEDIN_URL }}
 

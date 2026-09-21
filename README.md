@@ -91,7 +91,7 @@ The workflow in `.github/workflows/deploy.yml` runs on every push to `main`: ins
 3. **Settings → Secrets and variables → Actions → Variables**: add the variables from the table above.
 4. `git push origin main`. The site publishes automatically.
 
-If you set no variables, the workflow defaults to Scenario B below (`/REPOSITORY/` base path, `https://OWNER.github.io` site URL, and the repository owner as the GitHub username). Set the variables only to override that, for example when you add a custom domain.
+If you set no variables, the workflow builds for the custom domain **https://emdadulhaque.work.gd** (base path `/`) with the repository owner as the GitHub username. Set the variables only to override that. To serve from `https://OWNER.github.io/REPOSITORY/` instead, use Scenario B below.
 
 ### Scenario A: custom domain, or a `USERNAME.github.io` repository
 
