@@ -16,13 +16,13 @@ export const projects: Project[] = [
     category: 'AI & RAG',
     status: 'MVP',
     summary:
-      'Enterprise knowledge retrieval that grounds LLM answers in indexed company documents using embeddings, a vector database and semantic search.',
+      'Enterprise knowledge retrieval that grounds LLM answers in indexed company documents using embeddings, a vector database and embedding-based semantic search.',
     overview:
       'A retrieval-augmented generation platform for enterprise document and knowledge search. Documents are ingested, embedded and indexed so an LLM-powered assistant can answer questions from company knowledge instead of relying on model memory.',
     problem:
       'Enterprise knowledge is scattered across documents and systems, and keyword search returns file lists rather than answers. General-purpose LLMs do not know internal content and cannot be trusted to guess it.',
     solution:
-      'Ingest documents, split them into chunks, embed each chunk, and store the vectors in a vector database. At query time, run semantic (and optionally hybrid) retrieval, assemble the retrieved context, and have the LLM generate an answer grounded in that context.',
+      'Ingest documents, split them into chunks, embed each chunk, and store the vectors in a vector database. At query time, run embedding-based semantic search (vector similarity, such as cosine similarity) and optionally hybrid retrieval, assemble the retrieved context, and have the LLM generate an answer grounded in that context.',
     architectureHighlights: [
       'Clean separation between ingestion, retrieval and generation so each stage can be evaluated and replaced independently.',
       'Embedding model and vector store are configuration choices (OpenAI text-embedding-3-small, Sentence Transformers, ChromaDB, Qdrant).',

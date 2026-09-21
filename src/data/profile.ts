@@ -16,7 +16,7 @@ export const profile: Profile = {
   cvPath: 'cv/MD-Emdadul-Haque-CV.pdf',
   summary: [
     'I am a software engineer with nearly six years of experience building enterprise software and backend platforms at Akij iBOS Limited. My foundation is C# and .NET: ASP.NET Core APIs, Entity Framework, microservices and database-driven systems for ERP, supply chain and accounting products.',
-    'Over the last few years I have added the AI layer on top of that foundation: LLM applications with OpenAI and Azure OpenAI, retrieval-augmented generation, embeddings, semantic search over vector databases, tool calling and agent workflows, and RAG evaluation. Python and FastAPI are my tools for the AI services; .NET remains my tool for the enterprise systems they plug into.',
+    'Over the last few years I have added the AI layer on top of that foundation: LLM applications with OpenAI and Azure OpenAI, retrieval-augmented generation, embeddings, embedding-based semantic search over vector databases, tool calling and agent workflows, and RAG evaluation. Python and FastAPI are my tools for the AI services; .NET remains my tool for the enterprise systems they plug into.',
     'What I care about is connecting AI to real systems: ERP data, SQL databases, enterprise APIs, industrial hardware and production infrastructure on Azure, Docker and Kubernetes. I also work on industrial and IoT solutions, from Modbus/RS485 control to computer vision on the production line, and I lead a small engineering team.',
   ],
   focusAreas: [

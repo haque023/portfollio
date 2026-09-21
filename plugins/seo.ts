@@ -53,6 +53,7 @@ export function seoPlugin(options: SeoPluginOptions): Plugin {
       `<title>${escapeAttr(page.title)}</title>`,
       `<meta name="description" content="${escapeAttr(page.description)}" />`,
       `<meta name="author" content="${escapeAttr(profile.name)}" />`,
+      '<meta name="robots" content="index, follow, max-image-preview:large" />',
       `<meta property="og:type" content="${page.path ? 'article' : 'website'}" />`,
       `<meta property="og:site_name" content="${escapeAttr(profile.name)}" />`,
       `<meta property="og:title" content="${escapeAttr(page.title)}" />`,

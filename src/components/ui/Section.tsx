@@ -33,12 +33,14 @@ export function Section({
     <section id={id} aria-labelledby={headingId} className={cn('py-20 sm:py-28', className)}>
       <Container>
         <Reveal className="mb-10 max-w-3xl sm:mb-14">
-          <p className="mb-3 font-mono text-xs tracking-[0.18em] text-accent uppercase">
-            {index && <span className="text-fg-subtle">{index} / </span>}
-            {eyebrow}
-          </p>
-          <h2 id={headingId} className="text-3xl font-semibold sm:text-4xl">
-            {title}
+          {/* One h2 holding the plain section label and the descriptive title, so the heading
+              carries the keyword ("Experience") while the visual design stays the same. */}
+          <h2 id={headingId}>
+            <span className="mb-3 block font-mono text-xs tracking-[0.18em] text-accent uppercase">
+              {index && <span className="text-fg-subtle">{index} / </span>}
+              {eyebrow}
+            </span>{' '}
+            <span className="block text-3xl font-semibold sm:text-4xl">{title}</span>
           </h2>
           {description && (
             <p className="mt-4 text-base leading-relaxed text-fg-muted sm:text-lg">{description}</p>
