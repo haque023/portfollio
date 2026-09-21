@@ -109,6 +109,16 @@ VITE_SITE_URL=https://USERNAME.github.io
 
 Routing, assets, canonical URLs and the sitemap all follow the base path. No code changes are needed.
 
+### Pre-rendering (content visible without JavaScript)
+
+`npm run build` runs three steps: the normal client build, a server build of the app (`src/entry-server.tsx`), and `scripts/prerender.mjs`, which renders `/` and every `/projects/<id>` page to real HTML and writes it into `dist/`. Search engines, link-preview scrapers, AI/reader tools and visitors with JavaScript disabled therefore see the full content, and the browser then **hydrates** the same HTML (`src/main.tsx`). `npm run dev` is unaffected: it renders in the browser as before.
+
+Rules that keep this working (please keep them when editing components):
+
+- Do not read `window`, `document` or `localStorage` while rendering; use effects.
+- Do not start content hidden (for example `initial={{ opacity: 0 }}`). Use `Reveal` / `useScrollReveal` (visible by default, hidden only after mount) or a CSS animation, so nothing is invisible in the static HTML.
+- Do not use `React.lazy` / `Suspense` for routes. The server and client must render the same tree, or hydration breaks.
+
 ### How routing works on GitHub Pages
 
 The app uses clean URLs (`/projects/agentmesh`) rather than `#` routes. At build time it emits a real `projects/<id>/index.html` for every project (with route-specific title, description and canonical tag) plus a `404.html` fallback that renders the app's not-found page.

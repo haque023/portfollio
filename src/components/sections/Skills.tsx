@@ -1,5 +1,4 @@
-import { useRef } from 'react'
-import { useInView, useReducedMotion } from 'framer-motion'
+import { useScrollReveal } from '../../hooks/useScrollReveal'
 import { getTier, skillGroups, tierLegend } from '../../data/skills'
 import { cn } from '../../lib/cn'
 import type { ProficiencyTier, SkillGroup } from '../../types'
@@ -24,10 +23,7 @@ function TierSwatch({ tier }: { tier: ProficiencyTier }) {
 }
 
 function SkillCard({ group }: { group: SkillGroup }) {
-  const ref = useRef<HTMLElement>(null)
-  const inView = useInView(ref, { once: true, margin: '0px 0px -80px 0px' })
-  const reduce = useReducedMotion()
-  const show = inView || reduce
+  const { ref, hidden } = useScrollReveal<HTMLElement>()
 
   return (
     <article ref={ref} className="card h-full p-5 sm:p-6">
@@ -59,7 +55,7 @@ function SkillCard({ group }: { group: SkillGroup }) {
                   )}
                   style={{
                     width: `${skill.score * 10}%`,
-                    transform: show ? 'scaleX(1)' : 'scaleX(0)',
+                    transform: hidden ? 'scaleX(0)' : 'scaleX(1)',
                     transitionDelay: `${Math.min(i, 10) * 40}ms`,
                   }}
                 />

@@ -14,5 +14,8 @@ export const env = {
   base: import.meta.env.BASE_URL,
 }
 
+/** Router basename: the base path without its trailing slash, or "/" at the domain root. */
+export const routerBasename = env.base.replace(/\/$/, '') || '/'
+
 /** Resolves a public-folder path (e.g. "cv/file.pdf") against the configured base path. */
 export const publicUrl = (path: string) => `${env.base}${path.replace(/^\/+/, '')}`

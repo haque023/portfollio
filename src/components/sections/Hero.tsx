@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { m, useReducedMotion } from 'framer-motion'
 import { ArrowRight, Mail } from 'lucide-react'
 import { profile, stats } from '../../data/profile'
 import { githubLink, linkedinLink } from '../../data/social'
@@ -63,36 +62,29 @@ function PipelineCard() {
 }
 
 export function Hero() {
-  const reduce = useReducedMotion()
-  const item = (delay: number) =>
-    reduce
-      ? {}
-      : {
-          initial: { opacity: 0, y: 16 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as const },
-        }
-
   return (
     <section id="home" aria-labelledby="hero-heading" className="relative isolate overflow-hidden">
       <HeroBackground />
       <Container className="relative pt-32 pb-16 sm:pt-40 sm:pb-20">
         <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-16">
           <div>
-            <m.p
-              {...item(0)}
-              className="mb-5 font-mono text-xs tracking-[0.18em] text-accent uppercase"
+            <p
+              style={{ animationDelay: '0s' }}
+              className="mb-5 animate-rise font-mono text-xs tracking-[0.18em] text-accent uppercase"
             >
               AI Engineering &middot; .NET &middot; Azure
-            </m.p>
-            <m.h1
-              {...item(0.08)}
+            </p>
+            <h1
+              style={{ animationDelay: '0.08s' }}
               id="hero-heading"
-              className="text-4xl leading-[1.05] font-semibold sm:text-6xl lg:text-7xl"
+              className="animate-rise text-4xl leading-[1.05] font-semibold sm:text-6xl lg:text-7xl"
             >
               <span className="text-gradient">{profile.name}</span>
-            </m.h1>
-            <m.p {...item(0.16)} className="mt-5 text-xl font-medium text-fg sm:text-2xl">
+            </h1>
+            <p
+              style={{ animationDelay: '0.16s' }}
+              className="mt-5 animate-rise text-xl font-medium text-fg sm:text-2xl"
+            >
               {profile.roles.map((role, i) => (
                 <span key={role}>
                   {i > 0 && (
@@ -104,15 +96,18 @@ export function Hero() {
                   {role}
                 </span>
               ))}
-            </m.p>
-            <m.p
-              {...item(0.24)}
-              className="mt-5 max-w-xl text-base leading-relaxed text-fg-muted sm:text-lg"
+            </p>
+            <p
+              style={{ animationDelay: '0.24s' }}
+              className="mt-5 max-w-xl animate-rise text-base leading-relaxed text-fg-muted sm:text-lg"
             >
               {profile.tagline}
-            </m.p>
+            </p>
 
-            <m.div {...item(0.32)} className="mt-8 flex flex-wrap gap-3">
+            <div
+              style={{ animationDelay: '0.32s' }}
+              className="mt-8 flex animate-rise flex-wrap gap-3"
+            >
               <Link to={{ pathname: '/', hash: '#projects' }} className={buttonStyles('primary')}>
                 View Projects
                 <ArrowRight className="size-4" aria-hidden="true" />
@@ -122,10 +117,10 @@ export function Hero() {
                 <Mail className="size-4" aria-hidden="true" />
                 Contact
               </Link>
-            </m.div>
+            </div>
 
             {(githubLink || linkedinLink) && (
-              <m.ul {...item(0.4)} className="mt-4 flex gap-2">
+              <ul style={{ animationDelay: '0.4s' }} className="mt-4 flex animate-rise gap-2">
                 {githubLink && (
                   <li>
                     <a
@@ -152,26 +147,30 @@ export function Hero() {
                     </a>
                   </li>
                 )}
-              </m.ul>
+              </ul>
             )}
 
-            <m.ul {...item(0.48)} className="mt-8 flex flex-wrap gap-2" aria-label="Core stack">
+            <ul
+              style={{ animationDelay: '0.48s' }}
+              className="mt-8 flex animate-rise flex-wrap gap-2"
+              aria-label="Core stack"
+            >
               {['.NET', 'Python', 'LLM', 'RAG', 'Azure'].map((t) => (
                 <li key={t}>
                   <Tag>{t}</Tag>
                 </li>
               ))}
-            </m.ul>
+            </ul>
           </div>
 
-          <m.div {...item(0.3)} className="hidden lg:block">
+          <div style={{ animationDelay: '0.3s' }} className="hidden animate-rise lg:block">
             <PipelineCard />
-          </m.div>
+          </div>
         </div>
 
-        <m.dl
-          {...item(0.56)}
-          className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line-strong/60 bg-line-strong/40 sm:mt-20 lg:grid-cols-4"
+        <dl
+          style={{ animationDelay: '0.56s' }}
+          className="mt-14 grid animate-rise grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line-strong/60 bg-line-strong/40 sm:mt-20 lg:grid-cols-4"
           aria-label="At a glance"
         >
           {stats.map((s) => (
@@ -183,7 +182,7 @@ export function Hero() {
               )}
             </div>
           ))}
-        </m.dl>
+        </dl>
         <p className="mt-3 text-xs text-fg-subtle">Figures are approximate and self-reported.</p>
       </Container>
     </section>

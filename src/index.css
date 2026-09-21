@@ -19,12 +19,23 @@
   --color-signal: #5eead4;
   --color-amber: #f2c46d;
 
+  --animate-rise: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-drift: drift 22s ease-in-out infinite alternate;
   --animate-scan: scan 9s linear infinite;
   --animate-flow: flow 2.4s linear infinite;
   --animate-step: step 7.5s ease-in-out infinite;
   --animate-blink: blink 1.1s steps(2, start) infinite;
 
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
   @keyframes drift {
     from {
       transform: translate3d(-3%, -2%, 0) scale(1);
