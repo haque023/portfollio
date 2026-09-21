@@ -1,0 +1,163 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans:
+    'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Dark-first palette. Text tokens all clear WCAG AA (4.5:1) on `ink` and `surface`. */
+  --color-ink: #0a0d13;
+  --color-surface: #0f141d;
+  --color-surface-2: #141b27;
+  --color-line: #1e2735;
+  --color-line-strong: #2d394c;
+  --color-fg: #e8ecf3;
+  --color-fg-muted: #a8b2c1;
+  --color-fg-subtle: #8593a6;
+  --color-accent: #7cb4ff;
+  --color-accent-strong: #5b9bf5;
+  --color-signal: #5eead4;
+  --color-amber: #f2c46d;
+
+  --animate-drift: drift 22s ease-in-out infinite alternate;
+  --animate-scan: scan 9s linear infinite;
+  --animate-flow: flow 2.4s linear infinite;
+  --animate-step: step 7.5s ease-in-out infinite;
+  --animate-blink: blink 1.1s steps(2, start) infinite;
+
+  @keyframes drift {
+    from {
+      transform: translate3d(-3%, -2%, 0) scale(1);
+    }
+    to {
+      transform: translate3d(4%, 3%, 0) scale(1.08);
+    }
+  }
+  @keyframes scan {
+    from {
+      transform: translateY(-10%);
+    }
+    to {
+      transform: translateY(110%);
+    }
+  }
+  @keyframes flow {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(400%);
+    }
+  }
+  @keyframes step {
+    0%,
+    100% {
+      opacity: 0.55;
+    }
+    8%,
+    22% {
+      opacity: 1;
+    }
+    30% {
+      opacity: 0.55;
+    }
+  }
+  @keyframes blink {
+    to {
+      visibility: hidden;
+    }
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    @apply bg-ink font-sans text-fg antialiased;
+    /* Guard against any stray horizontal overflow on very narrow screens. */
+    overflow-x: clip;
+    min-width: 320px;
+    font-feature-settings:
+      'cv11' 1,
+      'ss01' 1;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply tracking-tight text-balance;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-accent) 35%, transparent);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  a {
+    text-underline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Technical grid patterns */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  .bg-dots {
+    background-image: radial-gradient(rgb(255 255 255 / 0.09) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  .mask-fade-b {
+    mask-image: linear-gradient(to bottom, #000 40%, transparent 100%);
+  }
+  .mask-radial {
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 100%);
+  }
+
+  .card {
+    @apply rounded-2xl border border-line bg-surface/80;
+  }
+
+  .text-gradient {
+    background-image: linear-gradient(
+      100deg,
+      #b9d7ff 0%,
+      var(--color-accent) 45%,
+      var(--color-signal) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* Anything that moves for decoration is disabled when the user prefers reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

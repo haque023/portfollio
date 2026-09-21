@@ -1,0 +1,67 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Required for the official Pages deployment actions.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one deployment at a time; do not cancel one that is already publishing.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+        env:
+          # Optional overrides: Settings > Secrets and variables > Actions > Variables.
+          # They are public configuration, not secrets. Defaults target the standard
+          # https://OWNER.github.io/REPOSITORY/ URL; for a custom domain set
+          # VITE_BASE_PATH=/ and VITE_SITE_URL=https://yourdomain.com.
+          VITE_SITE_URL: ${{ vars.VITE_SITE_URL || format('https://{0}.github.io', github.repository_owner) }}
+          VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH || format('/{0}/', github.event.repository.name) }}
+          VITE_GITHUB_USERNAME: ${{ vars.VITE_GITHUB_USERNAME || github.repository_owner }}
+          VITE_LINKEDIN_URL: ${{ vars.VITE_LINKEDIN_URL }}
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
